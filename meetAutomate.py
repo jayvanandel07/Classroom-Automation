@@ -62,8 +62,8 @@ def AskToJoin():
   
   
 # assign email id and password
-mail_address = '20tuit032@skct.edu.in'
-password = 'techguy06'
+mail_address = 'MAIL ID HERE'
+password = 'PASSWORD HERE'
 
 
 # create chrome instamce
