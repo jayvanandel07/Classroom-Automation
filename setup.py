@@ -37,13 +37,9 @@ class HomePage(tk.Frame):
         label = ttk.Label(self, text="HomePage", font=LARGEFONT)
         label.grid(row=0, column=4, padx=10, pady=10)
 
-        button1 = ttk.Button(self, text="Page 1",
-                             command=lambda: controller.show_frame(ClassTimesPage))
-        button1.grid(row=1, column=1, padx=10, pady=10)
-
-        button2 = ttk.Button(self, text="Page 2",
-                             command=lambda: controller.show_frame(ClassesPage))
-        button2.grid(row=2, column=1, padx=10, pady=10)
+        nextButton = ttk.Button(self, text="Next",
+                                command=lambda: controller.show_frame(ClassTimesPage))
+        nextButton.grid(row=1, column=1, padx=10, pady=10)
 
 
 # second window frame page1
@@ -55,13 +51,13 @@ class ClassTimesPage(tk.Frame):
         label = ttk.Label(self, text="Page 1", font=LARGEFONT)
         label.grid(row=0, column=4, padx=10, pady=10)
 
-        button1 = ttk.Button(self, text="StartPage",
-                             command=lambda: controller.show_frame(HomePage))
-        button1.grid(row=1, column=1, padx=10, pady=10)
+        previousButton = ttk.Button(self, text="Back",
+                                    command=lambda: controller.show_frame(HomePage))
+        previousButton.grid(row=1, column=1, padx=10, pady=10)
 
-        button2 = ttk.Button(self, text="Page 2",
-                             command=lambda: controller.show_frame(ClassesPage))
-        button2.grid(row=2, column=1, padx=10, pady=10)
+        nextButton = ttk.Button(self, text="Next",
+                                command=lambda: controller.show_frame(ClassesPage))
+        nextButton.grid(row=2, column=1, padx=10, pady=10)
 
 
 class ClassesPage(tk.Frame):
@@ -70,13 +66,12 @@ class ClassesPage(tk.Frame):
         label = ttk.Label(self, text="Page 2", font=LARGEFONT)
         label.grid(row=0, column=4, padx=10, pady=10)
 
-        button1 = ttk.Button(self, text="Page 1",
-                             command=lambda: controller.show_frame(ClassTimesPage))
-        button1.grid(row=1, column=1, padx=10, pady=10)
+        nextButton = ttk.Button(self, text="Back",
+                                command=lambda: controller.show_frame(ClassTimesPage))
+        nextButton.grid(row=1, column=1, padx=10, pady=10)
 
-        button2 = ttk.Button(self, text="Startpage",
-                             command=lambda: controller.show_frame(HomePage))
-        button2.grid(row=2, column=1, padx=10, pady=10)
+        submitButton = ttk.Button(self, text="Submit")
+        submitButton.grid(row=2, column=1, padx=10, pady=10)
 
 
 app = tkinterApp()
