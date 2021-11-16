@@ -31,10 +31,14 @@ def Glogin(mail_address, password):
 def turnOffMicCam():
     # turn off Microphone
     time.sleep(2)
-    pyautogui.hotkey('ctrl', 'd')
+    driver.find_elements_by_xpath(
+        "//div[@class='ZB88ed']"
+    ).click()
     # turn off camera
     time.sleep(1)
-    pyautogui.hotkey('ctrl', 'e')
+    driver.find_elements_by_xpath(
+        "//div[@class='GOH7Zb']"
+    ).click()
     
     
   
