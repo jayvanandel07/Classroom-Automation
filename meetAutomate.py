@@ -27,9 +27,6 @@ def Glogin(mail_address, password):
     driver.get('https://google.com/')
     driver.implicitly_wait(100)
   
-def meetLogin():
-  driver.find_element('//span[@class="l4V7wb Fxmcue"]').click()
-  driver.find_element('//div[@data-email="20tuit032@skct.edu.in"]').click()
   
 def turnOffMicCam():
     # turn off Microphone
@@ -61,15 +58,14 @@ def AskToJoin():
     # Ask to join and join now buttons have same xpaths
   
   
-# assign email id and password
-mail_address = '20tuit032@skct.edu.in'
-password = 'techguy06'
 
 
 # create chrome instamce
 opt = Options()
 opt.add_argument('--disable-blink-features=AutomationControlled')
 opt.add_argument('--start-maximized')
+opt.add_argument("--user-data-dir=C:/Users/Jayvan andel/AppData/Local/Google/Chrome/User Data/")
+opt.add_argument('--profile-directory=Profile 1')
 
 opt.add_experimental_option("prefs", {
     "profile.default_content_setting_values.media_stream_mic": 1,
@@ -79,11 +75,9 @@ opt.add_experimental_option("prefs", {
 })
 driver = webdriver.Chrome(options=opt, executable_path=r"C:/Users/Jayvan andel/AppData/Roaming/chromedriver_win32/chromedriver.exe")
 
-# login to Google account
-Glogin(mail_address, password)
   
 # go to google meet
-driver.get('https://meet.google.com/agi-xjre-ybp')
+driver.get('https://meet.google.com/')
 
 # meetLogin()
 
