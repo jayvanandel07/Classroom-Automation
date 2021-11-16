@@ -79,5 +79,7 @@ class ClassesPage(tk.Frame):
         button2.grid(row=2, column=1, padx=10, pady=10)
 
 
+print("Push")
+
 app = tkinterApp()
 app.mainloop()
