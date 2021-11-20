@@ -14,5 +14,7 @@ Steps:
 
 (*) Note: if you have multiple browser profiles open your preferred open your prefered profile before starting the program (if the the program doesnt open your prefered profile) 
 
+(*) Note: ignore testScript folder
+
 
 thats it your all set!
