@@ -1,5 +1,3 @@
-from calendar import THURSDAY
-
 
 TIME_TABLE={
   "MONDAY":["PS","COA","DSA","DLD"],
@@ -7,6 +5,7 @@ TIME_TABLE={
   "WEDNESDAY":["COA","DSA","PS","UHV"],
   "THURSDAY":["DLD","OOPS","DSA","PS"],
   "FRIDAY":["UHV","DLD","OOPS","COA"],
+  "SATURDAY":["UHV","DLD","OOPS","COA"],
   "SUNDAY":["UHV","DLD","OOPS","COA"]
   
 }

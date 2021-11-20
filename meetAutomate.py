@@ -1,92 +1,107 @@
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-import pyautogui
-import webbrowser
-import time
 
-pyautogui.PAUSE = 0.5  
+import time
+import webbrowser
+import pyautogui
+from datetime import date,datetime
+import calendar
+import schedule
+from setup.meetLink import LINKS,TIME_TABLE
+from setup.coordinates import COORDINATES
+
+pyautogui.PAUSE = 0.5
+
+
+
+def today():
+  my_date = date.today()
+  return calendar.day_name[my_date.weekday()].upper()
+
+def current_time():
+  now = datetime.now().time()
+  return now
   
-def Glogin(mail_address, password):
-    # Login Page
-    driver.get(
-        'https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com/&ec=GAZAAQ')
   
-    # input Gmail
-    driver.find_element_by_id("identifierId").send_keys(mail_address)
-    driver.find_element_by_id("identifierNext").click()
-    driver.implicitly_wait(10)
+def findClass(period):
   
-    # input Password
-    driver.find_element_by_xpath(
-        '//*[@id="password"]/div[1]/div/div[1]/input').send_keys(password)
-    driver.implicitly_wait(10)
-    driver.find_element_by_id("passwordNext").click()
-    driver.implicitly_wait(10)
+    # Find class and return the url
+    print(today())
+    print(current_time())
+    print(period+1,":",TIME_TABLE[today()][period])
+    return LINKS[TIME_TABLE[today()][period]]
   
-    # go to google home page
-    driver.get('https://google.com/')
-    driver.implicitly_wait(100)
-  
-def meetLogin():
-  driver.find_element('//span[@class="l4V7wb Fxmcue"]').click()
-  driver.find_element('//div[@data-email="20tuit032@skct.edu.in"]').click()
-  
+
+def openMeet(url):
+    # Open meet
+    time.sleep(5)
+    webbrowser.open_new(url)
+    
+    time.sleep(5)
+    pyautogui.leftClick(x=1311, y=413)
+    
+    print("opening meet")
+    
 def turnOffMicCam():
     # turn off Microphone
     time.sleep(2)
     pyautogui.hotkey('ctrl', 'd')
     # turn off camera
-    time.sleep(1)
+    time.sleep(2)
     pyautogui.hotkey('ctrl', 'e')
     
+    print('Turing off mic and camera')
     
-  
-  
-def joinNow():
+def joinNow(X=1412, Y=616):
     # Join meet
-    print(1)
-    time.sleep(5)
-    driver.implicitly_wait(2000)
-    driver.find_element(
-        '//div[@class="XCoPyb"]/div[@class="uArJ5e UQuaGc Y5sE8d uyXBBb xKiqt"]/span[@class="l4V7wb Fxmcue"]').click()
-    print(1)
+    time.sleep(1)
+    pyautogui.leftClick(x=X, y=Y)
+    time.sleep(1)
+    
+    print("join meet")
+    
+def leaveMeet(X=1187, Y=950):
+    # Leave meet
+    time.sleep(2)
+    pyautogui.leftClick(x=X, y=Y)    
+    time.sleep(1)
+
+    print("leaving meet")
+    
+
   
-  
-def AskToJoin():
-    # Ask to Join meet
-    time.sleep(5)
-    driver.implicitly_wait(2000)
-    driver.find_element_by_css_selector(
-        'div.uArJ5e.UQuaGc.Y5sE8d.uyXBBb.xKiqt').click()
-    # Ask to join and join now buttons have same xpaths
-  
-  
-# assign email id and password
-mail_address = 'MAIL ID HERE'
-password = 'PASSWORD HERE'
+def job(p):
+    # Run
+    openMeet(findClass(p))
+    turnOffMicCam()
+    joinNow(COORDINATES[0][0],COORDINATES[0][1])
+    
+def leave():
+    leaveMeet(COORDINATES[1][0],COORDINATES[1][1])
+    
+
+def taskComplete():
+    print("Task Complete!")
+    time.sleep(10)
+    quit()
+    
+print("Classroom Bot Online!")
 
 
-# create chrome instamce
-opt = Options()
-opt.add_argument('--disable-blink-features=AutomationControlled')
-opt.add_argument('--start-maximized')
+schedule.every().day.at("09:33:00").do(job,0) # 9:33:00 joining time
+schedule.every().day.at("10:26:00").do(leave) # 10:26:00 leaving time
 
-opt.add_experimental_option("prefs", {
-    "profile.default_content_setting_values.media_stream_mic": 1,
-    "profile.default_content_setting_values.media_stream_camera": 1,
-    "profile.default_content_setting_values.geolocation": 0,
-    "profile.default_content_setting_values.notifications": 1
-})
-driver = webdriver.Chrome(options=opt, executable_path=r"C:/Users/Jayvan andel/AppData/Roaming/chromedriver_win32/chromedriver.exe")
+schedule.every().day.at("10:28:00").do(job,1)
+schedule.every().day.at("11:21:00").do(leave)
 
-# login to Google account
-Glogin(mail_address, password)
-  
-# go to google meet
-driver.get('https://meet.google.com/agi-xjre-ybp')
+schedule.every().day.at("13:28:00").do(job,2)
+schedule.every().day.at("14:21:00").do(leave)
 
-# meetLogin()
+schedule.every().day.at("14:23:00").do(job,3)
+schedule.every().day.at("15:16:00").do(leave)
+schedule.every().day.at("15:25:00").do(taskComplete)
 
-turnOffMicCam()
-# AskToJoin()
-joinNow()
+
+while True:
+    schedule.run_pending()
+    time.sleep(1)
+
+
